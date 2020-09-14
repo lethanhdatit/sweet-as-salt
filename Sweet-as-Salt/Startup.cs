@@ -2,9 +2,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sweet_as_Salt.Entities;
+using Sweet_as_Salt.Services;
+using Sweet_as_Salt.UnitOfWork;
 
 namespace Sweet_as_Salt
 {
@@ -22,6 +26,12 @@ namespace Sweet_as_Salt
         {
 
             services.AddControllersWithViews();
+            services.AddSingleton(provider => Configuration);
+            services.AddDbContext<SweetAsSaltDBContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("MainConnection")));
+
+            services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
