@@ -9,4 +9,9 @@ namespace Sweet_as_Salt.Common
        Active = 1,
        Inactive = 2
     }
+    public enum UserTypes : byte
+    {
+        GUEST = 1,
+        MEMBER = 2
+    }
 }

@@ -23,7 +23,7 @@ namespace Sweet_as_Salt.Entities
         public virtual DbSet<QuestionnaireUsers> QuestionnaireUsers { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-
+        public virtual DbSet<GlobalSetting> GlobalSettings { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

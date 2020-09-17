@@ -17,6 +17,8 @@ namespace Sweet_as_Salt.Services
         Task DeleteAsync(object keyValues);
 
         Task<TEntity> FindByIdAsync(object keyValues);
-
+        TEntity FindById(object keyValues);
+        Task<IQueryable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> filter = null,
+             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
     }
 }

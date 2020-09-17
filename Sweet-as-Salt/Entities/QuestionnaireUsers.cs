@@ -10,7 +10,6 @@ namespace Sweet_as_Salt.Entities
         public long QuestionId { get; set; }
         public bool? Selection { get; set; }
         public double? SnapPoint { get; set; }
-
         public virtual Questions Question { get; set; }
         public virtual Users User { get; set; }
     }

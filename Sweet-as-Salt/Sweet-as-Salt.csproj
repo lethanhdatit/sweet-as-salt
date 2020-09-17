@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commons\" />
     <Folder Include="UnitOfWorks\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

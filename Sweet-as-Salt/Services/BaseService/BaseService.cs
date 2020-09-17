@@ -56,5 +56,22 @@ namespace Sweet_as_Salt.Services
         {
             return await _reponsitory.FindByIdAsync(id);
         }
+        public virtual TEntity FindById(object id)
+        {
+            return _reponsitory.FindById(id);
+        }
+        public async Task<IQueryable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> filter = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        {
+            var query = _reponsitory.Find(filter);
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            const int PageSize = 10;
+            return query;
+        }
     }
 }

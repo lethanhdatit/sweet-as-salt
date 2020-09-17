@@ -16,7 +16,7 @@ namespace Sweet_as_Salt
             Content = entity.Content;
             ContentUrl = entity.ContentUrl;
             Point = entity.Point;
-            //IsCorrect = entity.IsCorrect;
+            IsCorrect = entity.IsCorrect;
             //Status = entity.Status;
             //CreatedTs = entity.CreatedTs;
         }
@@ -30,7 +30,7 @@ namespace Sweet_as_Salt
         public string Content { get; set; }
         public string ContentUrl { get; set; }
         public double Point { get; set; }
-        //public bool IsCorrect { get; set; }
+        public bool IsCorrect { get; set; }
         //public byte Status { get; set; }
         //public DateTime CreatedTs { get; set; }
     }

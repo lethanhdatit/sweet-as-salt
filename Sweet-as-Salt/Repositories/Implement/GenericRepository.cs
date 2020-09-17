@@ -43,10 +43,19 @@ namespace Sweet_as_Salt.Repositories
         {
             return await _dbSet.FindAsync(id);
         }
+        public virtual TEntity FindById(object id)
+        {
+            return _dbSet.Find(id);
+        }
 
         public virtual void Add(TEntity entity)
         {
             _dbSet.Add(entity);
+        }
+
+        public virtual void AddRange(IEnumerable<TEntity> entities)
+        {
+            _dbSet.AddRange(entities);
         }
 
         public virtual void Delete(object id)
