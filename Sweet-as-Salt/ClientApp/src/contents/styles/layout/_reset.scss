@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'enchanted-land';
+    src: url('../../fonts/Enchanted-Land.woff') format('woff'),
+         url('../../fonts/Enchanted-Land.otf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+a {
+    text-decoration: none;
+}
+html, body{
+    font-family: 'enchanted-land', sans-serif;
+    @include styleText($color-black-0,$fs-0,$fw-normal);
+}
+.sas{
+    .sas__container {
+        width: 100%;
+        max-width: 400px;
+        //padding-right: 15px;
+        //padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        //background: #fff;
+    }
+    .sas__background{
+        background: url("../../images/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+}

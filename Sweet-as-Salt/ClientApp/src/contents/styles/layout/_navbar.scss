@@ -1,0 +1,17 @@
+.sas__navbar{
+    background: url("../../images/menu-background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .navbar__menu{
+        display: flex;
+        flex-direction: row;
+        a {
+            color: #fff;
+        }
+    }
+}

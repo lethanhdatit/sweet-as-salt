@@ -1,20 +1,49 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-
-import './custom.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import 'contents/styles/main.scss'
+import PageNotFound from 'components/AppScreens/PageNotFound';
+import {appRoutes} from 'routes'
+import AppTemplate from 'components/AppTemplate';
+import LoadingScreen from 'components/AppScreens/LoadingScreen';
 
 export default class App extends Component {
-  static displayName = App.name;
-
-  render () {
+  constructor(props){
+    super(props);
+    this.state = {
+      isFirstLoading: true,
+    }
+  }
+  componentDidMount() { 
+    setTimeout(() => this.setState({isFirstLoading: false}), 1000);
+  }
+  
+  componentWillUnmount() {
+     this.setState({isFirstLoading: true})
+  }
+  renderAppTemplate = (routes) => {
+    if(routes && routes.length > 0){
+      return routes.map((route, index)=>{
+        return <AppTemplate key={index} exact={route.exact} path={route.path} Component={route.component}></AppTemplate>
+      })
+    }
+  }
+  render() {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
-    );
+      <div className="sas">
+        <div className="sas__background">
+          {this.state.isFirstLoading ? (
+              <LoadingScreen />
+            ) : (
+                <BrowserRouter>
+                  <Switch>
+                    {this.renderAppTemplate(appRoutes)}
+                    <Route path="" component={PageNotFound} />
+                  </Switch>
+                </BrowserRouter>
+              )
+          }
+        </div>
+      </div>
+    )
   }
 }
