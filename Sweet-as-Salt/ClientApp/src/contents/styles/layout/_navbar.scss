@@ -7,11 +7,16 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 0 15px;
+    .navbar__logoimg{
+        width: 30px;
+    }
     .navbar__menu{
         display: flex;
         flex-direction: row;
         a {
             color: #fff;
+            text-transform: uppercase;
         }
     }
 }

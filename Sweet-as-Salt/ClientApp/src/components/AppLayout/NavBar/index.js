@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { NavLink } from "react-router-dom";
-import {logoimg} from 'contents/images/sas-crown-icon.png'
+import logoimg from '../../../contents/images/sas-crown-icon.png';
 export default class NavBar extends Component {
     render() {
+        console.log(logoimg)
         return (
             <div className="sas__navbar">
                 <div className="navbar__logo">
