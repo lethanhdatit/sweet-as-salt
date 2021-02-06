@@ -17,6 +17,7 @@ namespace Sweet_as_Salt.Entities
         public string ContentUrl { get; set; }
         public double Point { get; set; }
         public bool IsCorrect { get; set; }
+        public double InCorrectScale { get; set; }
         public byte Status { get; set; }
         public DateTime CreatedTs { get; set; }
 

@@ -94,7 +94,7 @@ namespace Sweet_as_Salt.Controllers
                             QuestionId = x.QuestionId,
                             UserId = user.Id,
                             Selection = bool.Parse(x.Selection),
-                            SnapPoint = question.IsCorrect == bool.Parse(x.Selection) ? question.Point : 0
+                            SnapPoint = question.IsCorrect == bool.Parse(x.Selection) ? question.Point : question.Point * question.InCorrectScale
                         };
                     });
                     await _questionnaireUserService.SubmitRangeAsync(QuestionnaireUsersDto);

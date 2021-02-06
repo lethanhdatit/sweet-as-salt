@@ -56,13 +56,13 @@ export default class ScoreScreen extends Component {
       async fetchData() {
           try
           {
-              const response = await fetch('apiAction'); // gọi api lên controller để lấy data
+              const response = await fetch('leaderBoard'); // gọi api lên controller để lấy data
               const data = await response.json();
               console.log(data);
               this.setState({ items: data, loading: false });
           }
           catch (e) {
-              console.log("Gọi API thất bại");
+              console.log(e);
           }
       }
 }
