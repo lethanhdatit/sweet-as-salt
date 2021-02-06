@@ -1,37 +1,55 @@
 using Sweet_as_Salt.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Sweet_as_Salt
 {
     public class QuestionDto
     {
+        public QuestionDto() {}
         public QuestionDto(Questions entity)
         {
             Id = entity.Id;
-            CharacterId = entity.CharacterId;
-            CharacterName = entity.Character?.Name;
-            CharacterDescription = entity.Character?.Description;
-            CharacterContentUrl = entity.Character?.ContentUrl;
             Description = entity.Description;
             Content = entity.Content;
             ContentUrl = entity.ContentUrl;
             Point = entity.Point;
             IsCorrect = entity.IsCorrect;
-            //Status = entity.Status;
-            //CreatedTs = entity.CreatedTs;
+            InCorrectPoint = entity.InCorrectScale * entity.Point;
         }
 
         public long Id { get; set; }
-        public long? CharacterId { get; set; }
-        public string CharacterName { get; set; }
-        public string CharacterDescription { get; set; }
-        public string CharacterContentUrl { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
         public string ContentUrl { get; set; }
         public double Point { get; set; }
+        public double InCorrectPoint { get; set; }
         public bool IsCorrect { get; set; }
-        //public byte Status { get; set; }
-        //public DateTime CreatedTs { get; set; }
+    }
+    public class CharacterDto
+    {
+        public CharacterDto(Characters c)
+        {
+            this.Name = c.Name;
+            this.Description = c.Description;
+            this.ContentUrl = c.ContentUrl;
+        }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ContentUrl { get; set; }
+        public QuestionDto Question { get; set; } = new QuestionDto();
+    }
+    public class PlayerSession
+    {
+        public IEnumerable<CharacterDto> Characters { get; set; }
+        public int QLength
+        {
+            get { return this.Characters.Count(); }
+        }
+        public double QMaxPoint
+        {
+            get { return this.Characters.Sum(s => s.Question.Point); }
+        }
     }
 }

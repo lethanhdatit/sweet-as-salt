@@ -20,14 +20,21 @@ namespace Sweet_as_Salt.Controllers
         private readonly IQuestionService _questionService;
         private readonly IUserService _userService;
         private readonly IQuestionnaireUserService _questionnaireUserService;
+        private readonly ICharacterService _characterService;
         private readonly GlobalSettingService _globalSetting;
-        public QuestionController(ILogger<QuestionController> logger, IQuestionService questionService, IUserService userService, IQuestionnaireUserService questionnaireUserService, GlobalSettingService globalSetting)
+        public QuestionController(ILogger<QuestionController> logger, 
+                                  IQuestionService questionService, 
+                                  IUserService userService, 
+                                  IQuestionnaireUserService questionnaireUserService,
+                                  ICharacterService characterService,
+                                  GlobalSettingService globalSetting)
         {
             _logger = logger;
             _questionService = questionService;
             _userService = userService;
             _globalSetting = globalSetting;
             _questionnaireUserService = questionnaireUserService;
+            _characterService = characterService;
         }
 
         /// <summary>
@@ -35,15 +42,31 @@ namespace Sweet_as_Salt.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<QuestionDto> Get()
+        public PlayerSession Get()
         {
-            // Lấy list các câu hỏi đang active từ database để tạo kho.
-            var questionPool = _questionService.GetAllActive("Character")?.Select(x => new QuestionDto(x));
-
+            var numberItem = _globalSetting.Get().NUMBER_QUESTION_EACH_SESSION;
+            // Lấy list các nhân vật active.
+            var characters = _characterService.GetAllActive()?.Select(x => new CharacterDto(x));
+            if (characters == null || !characters.Any())
+                return null;
+            // Pick random bộ các nhân vật.
+            var sessionCharacters = EnumerableExtension.PickRandom(characters, numberItem);
+            // Lấy list các câu hỏi đang active.
+            var questionPool = _questionService.GetAllActive()?.Select(x => new QuestionDto(x));
+            if (questionPool == null || !questionPool.Any())
+                return null;
             // Pick random bộ câu hỏi từ kho vừa tạo để người dùng bắt đầu sử dụng.
-            var sessionQuestions = EnumerableExtension.PickRandom(questionPool, _globalSetting.Get().NUMBER_QUESTION_EACH_SESSION);
+            var sessionQuestions = EnumerableExtension.PickRandom(questionPool, numberItem).ToArray();
+            if (sessionCharacters.Count() != sessionQuestions.Count())
+                return null;
 
-            return sessionQuestions;
+            return new PlayerSession
+            {
+                Characters = sessionCharacters.Select((s, index) => {
+                    s.Question = sessionQuestions[index];
+                    return s;
+                })
+            };
         }
 
         [HttpPost]

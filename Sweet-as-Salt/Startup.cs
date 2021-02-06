@@ -30,10 +30,11 @@ namespace Sweet_as_Salt
             services.AddDbContext<SweetAsSaltDBContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("MainConnection")));
 
-            services.AddTransient<GlobalSettingService>();
+            services.AddScoped<GlobalSettingService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IQuestionnaireUserService, QuestionnaireUserService>();
+            services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
             // In production, the React files will be served from this directory
