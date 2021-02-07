@@ -3,17 +3,24 @@
     src: url('../../fonts/Enchanted-Land.woff') format('woff'),
          url('../../fonts/Enchanted-Land.otf') format('truetype');
 }
-
+@font-face {
+  font-family: 'trattatello';
+  src: url('../../fonts/Trattatello.eot'); /* IE9 Compat Modes */
+  src: url('../../fonts/Trattatello.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../../fonts/Trattatello.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../../fonts/Trattatello.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
 * {
     margin: 0;
     padding: 0;
     color: #fff;
+    line-height: 1.25em;
 }
 a {
     text-decoration: none;
 }
 html, body{
-    font-family: 'enchanted-land', sans-serif;
+    font-family: 'trattatello', sans-serif;
     @include styleText($color-black-0,$fs-0,$fw-normal);
 }
 .sas{
@@ -24,6 +31,7 @@ html, body{
         //padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
+        position: relative;
         //background: #fff;
     }
     .sas__background{
@@ -32,4 +40,22 @@ html, body{
         background-repeat: no-repeat;
         height: 100vh;
     }
+}
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a89f97;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b7b0aa;
 }
