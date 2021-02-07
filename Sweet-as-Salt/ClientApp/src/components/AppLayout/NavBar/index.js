@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import logoimg from '../../../contents/images/sas-crown-icon.png';
 export default class NavBar extends Component {
     render() {
-        console.log(logoimg)
         return (
             <div className="sas__navbar">
                 <div className="navbar__logo">
@@ -13,8 +12,8 @@ export default class NavBar extends Component {
                 </div>
                 <div className="navbar__menu">
                     <NavLink activeClassName="active" className="nav-link" to="/instructions">Instructions</NavLink>
-                    <NavLink activeClassName="active" className="nav-link" to="/about">About</NavLink>
                     <NavLink activeClassName="active" className="nav-link" to="/score">Score</NavLink>
+                    <NavLink activeClassName="active" className="nav-link" to="/about">About</NavLink>
                 </div>
             </div>
         )
