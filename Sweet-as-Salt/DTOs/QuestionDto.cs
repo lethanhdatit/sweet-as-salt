@@ -13,6 +13,7 @@ namespace Sweet_as_Salt
             Id = entity.Id;
             Description = entity.Description;
             Content = entity.Content;
+            Info = entity.Info;
             ContentUrl = entity.ContentUrl;
             Point = entity.Point;
             IsCorrect = entity.IsCorrect;
@@ -22,6 +23,7 @@ namespace Sweet_as_Salt
         public long Id { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
+        public string Info { get; set; }
         public string ContentUrl { get; set; }
         public double Point { get; set; }
         public double InCorrectPoint { get; set; }
@@ -34,6 +36,8 @@ namespace Sweet_as_Salt
             this.Name = c.Name;
             this.Description = c.Description;
             this.ContentUrl = c.ContentUrl;
+            var randomQ = EnumerableExtension.PickRandom(c.Questions, 1)?.FirstOrDefault();
+            this.Question = new QuestionDto(randomQ);
         }
         public string Name { get; set; }
         public string Description { get; set; }

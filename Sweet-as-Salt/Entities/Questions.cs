@@ -14,6 +14,7 @@ namespace Sweet_as_Salt.Entities
         public long? CharacterId { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
+        public string Info { get; set; }
         public string ContentUrl { get; set; }
         public double Point { get; set; }
         public bool IsCorrect { get; set; }

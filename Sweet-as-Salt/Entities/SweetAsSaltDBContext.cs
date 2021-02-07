@@ -53,6 +53,11 @@ namespace Sweet_as_Salt.Entities
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(128);
+
+                entity.HasMany(d => d.Questions)
+                    .WithOne(p => p.Character)
+                    .HasForeignKey(d => d.CharacterId)
+                    .HasConstraintName("FK_Questions_Characters");
             });
 
             modelBuilder.Entity<QuestionnaireUsers>(entity =>
@@ -85,7 +90,9 @@ namespace Sweet_as_Salt.Entities
                 entity.Property(e => e.Content)
                     .IsRequired()
                     .HasMaxLength(512);
-
+                entity.Property(e => e.Info)
+                    .IsRequired()
+                    .HasMaxLength(512);
                 entity.Property(e => e.ContentUrl)
                     .HasColumnName("ContentURL")
                     .HasColumnType("ntext");

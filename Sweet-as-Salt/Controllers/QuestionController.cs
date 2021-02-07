@@ -46,26 +46,16 @@ namespace Sweet_as_Salt.Controllers
         {
             var numberItem = _globalSetting.Get().NUMBER_QUESTION_EACH_SESSION;
             // Lấy list các nhân vật active.
-            var characters = _characterService.GetAllActive()?.Select(x => new CharacterDto(x));
+            var characters = _characterService.GetAllActive("Questions")?
+                                            .Where(w => w.Questions.Any())?
+                                            .Select(x => new CharacterDto(x));
             if (characters == null || !characters.Any())
                 return null;
             // Pick random bộ các nhân vật.
             var sessionCharacters = EnumerableExtension.PickRandom(characters, numberItem);
-            // Lấy list các câu hỏi đang active.
-            var questionPool = _questionService.GetAllActive()?.Select(x => new QuestionDto(x));
-            if (questionPool == null || !questionPool.Any())
-                return null;
-            // Pick random bộ câu hỏi từ kho vừa tạo để người dùng bắt đầu sử dụng.
-            var sessionQuestions = EnumerableExtension.PickRandom(questionPool, numberItem).ToArray();
-            if (sessionCharacters.Count() != sessionQuestions.Count())
-                return null;
-
             return new PlayerSession
             {
-                Characters = sessionCharacters.Select((s, index) => {
-                    s.Question = sessionQuestions[index];
-                    return s;
-                })
+                Characters = sessionCharacters
             };
         }
 
