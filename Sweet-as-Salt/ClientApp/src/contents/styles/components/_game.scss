@@ -1,4 +1,7 @@
 .sas__game{
+  max-height: 100vh;
+  overflow: hidden;
+  color: #fff;
   img{
     width: 100%;
   }
@@ -6,5 +9,26 @@
     z-index: 999;
     position: absolute;
     margin-top: 90px;
+  }
+  .sas__gamewrapper{
+    .sas__gameitem{
+      .gameitem__dialog{
+        background-image: url('../../images/game/dialog-box.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 90%;
+        height: 150px;
+        top: 60px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+        padding: 1em 0.8em;
+        font-size: 1.2em;
+      }
+      .gameitem__help{
+  
+      }
+    }
   }
 }

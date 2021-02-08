@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import TinderCard from 'react-tinder-card';
+import LoadingScreen from 'components/AppScreens/LoadingScreen';
 export default class GameScreen extends Component {
   constructor(props) {
     super(props);
@@ -119,21 +120,24 @@ export default class GameScreen extends Component {
         {
           this.state.isFinish != true
             ?
-            <div>
+            <Fragment>
               {
                 this.state.isLoading == true ?
-                  <div className="hint-gr">
-                    <h2>Loading .....</h2>
-                  </div>
+                  // <div className="hint-gr">
+                  //   <h2>Loading .....</h2>
+                  // </div>
+                  <LoadingScreen/>
                   :
-                  <div>
-                    <div className="hint-gr">
+                  <div className="sas__gamewrapper">
+
+                    {/* <div className="hint-gr">
                       <h4>Dialog: {this.state.dialogText}</h4>
                       <br />
                       <h4>Question: {this.state.questionText}</h4>
                       <br />
                       <h4>Info: {this.state.infoText}</h4>
-                    </div>
+                    </div> */}
+                    
                     {
                       this.state.gameSession != null ?
                         this.state.gameSession.map((item, index) => {
@@ -144,8 +148,13 @@ export default class GameScreen extends Component {
                             key={index}
                             onSwipe={(direction) => onSwipe(direction, item.question, nextQuestion)}
                             preventSwipe={['up', 'down']}
+                            className="sas__gameitem"
                           >
                             <img src={_src} />
+                            <div className="gameitem__dialog">
+                              {this.state.dialogText}
+                            </div>
+                            <div className="gameitem__help"></div>
                           </TinderCard>
                         })
                         :
@@ -153,7 +162,7 @@ export default class GameScreen extends Component {
                     }
                   </div>
               }
-            </div>
+            </Fragment>
             :
             <div className="hint-gr">
               <h2>Your point: {this.state.yourPoint}</h2>
