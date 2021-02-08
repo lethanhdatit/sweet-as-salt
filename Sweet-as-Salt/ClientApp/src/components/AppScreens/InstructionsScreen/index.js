@@ -8,7 +8,7 @@ export default class InstructionsScreen extends Component {
     return (
       <div className="sas__blankpaper">
         <div className="sas__instructions">
-          <Swiper
+          <Swiper 
             spaceBetween={50}
             slidesPerView={1}
             onSlideChange={() => console.log('slide change')}
