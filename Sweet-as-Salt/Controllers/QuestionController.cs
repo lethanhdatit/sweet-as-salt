@@ -20,14 +20,21 @@ namespace Sweet_as_Salt.Controllers
         private readonly IQuestionService _questionService;
         private readonly IUserService _userService;
         private readonly IQuestionnaireUserService _questionnaireUserService;
+        private readonly ICharacterService _characterService;
         private readonly GlobalSettingService _globalSetting;
-        public QuestionController(ILogger<QuestionController> logger, IQuestionService questionService, IUserService userService, IQuestionnaireUserService questionnaireUserService, GlobalSettingService globalSetting)
+        public QuestionController(ILogger<QuestionController> logger, 
+                                  IQuestionService questionService, 
+                                  IUserService userService, 
+                                  IQuestionnaireUserService questionnaireUserService,
+                                  ICharacterService characterService,
+                                  GlobalSettingService globalSetting)
         {
             _logger = logger;
             _questionService = questionService;
             _userService = userService;
             _globalSetting = globalSetting;
             _questionnaireUserService = questionnaireUserService;
+            _characterService = characterService;
         }
 
         /// <summary>
@@ -35,15 +42,21 @@ namespace Sweet_as_Salt.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<QuestionDto> Get()
+        public PlayerSession Get()
         {
-            // Lấy list các câu hỏi đang active từ database để tạo kho.
-            var questionPool = _questionService.GetAllActive("Character")?.Select(x => new QuestionDto(x));
-
-            // Pick random bộ câu hỏi từ kho vừa tạo để người dùng bắt đầu sử dụng.
-            var sessionQuestions = EnumerableExtension.PickRandom(questionPool, _globalSetting.Get().NUMBER_QUESTION_EACH_SESSION);
-
-            return sessionQuestions;
+            var numberItem = _globalSetting.Get().NUMBER_QUESTION_EACH_SESSION;
+            // Lấy list các nhân vật active.
+            var characters = _characterService.GetAllActive("Questions")?
+                                            .Where(w => w.Questions.Any())?
+                                            .Select(x => new CharacterDto(x));
+            if (characters == null || !characters.Any())
+                return null;
+            // Pick random bộ các nhân vật.
+            var sessionCharacters = EnumerableExtension.PickRandom(characters, numberItem);
+            return new PlayerSession
+            {
+                Characters = sessionCharacters
+            };
         }
 
         [HttpPost]
@@ -94,7 +107,7 @@ namespace Sweet_as_Salt.Controllers
                             QuestionId = x.QuestionId,
                             UserId = user.Id,
                             Selection = bool.Parse(x.Selection),
-                            SnapPoint = question.IsCorrect == bool.Parse(x.Selection) ? question.Point : 0
+                            SnapPoint = question.IsCorrect == bool.Parse(x.Selection) ? question.Point : question.Point * question.InCorrectScale
                         };
                     });
                     await _questionnaireUserService.SubmitRangeAsync(QuestionnaireUsersDto);

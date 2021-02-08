@@ -20,14 +20,14 @@ namespace Sweet_as_Salt.Services
 
         public IEnumerable<Users> GetAllActive(string includeProperties = "")
         {
-            return _unitOfWork.UserRepository.Find(x => x.Status == (byte)BaseEnumStatus.Active, includeProperties: includeProperties);
+            return _reponsitory.Find(x => x.Status == (byte)BaseEnumStatus.Active, includeProperties: includeProperties);
         }
 
         public async Task<Users> SubmitAsync(Users user)
         {
             user.CreatedTs = DateTime.UtcNow;
             //await CreateAsync(productDto);
-            _unitOfWork.UserRepository.Add(user);
+            _reponsitory.Add(user);
             _unitOfWork.SaveChanges();
             return user;
         }

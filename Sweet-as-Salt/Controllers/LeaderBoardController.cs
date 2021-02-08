@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -44,9 +45,15 @@ namespace Sweet_as_Salt.Controllers
                     ID = x.Key.Id,
                     Name = x.Key.FullName,
                     CreatedTS = DateTime.UtcNow,
-                    TotalScore = isRealTime ? 
-                                 x.Where(w => w.Selection.HasValue && (w.Question.IsCorrect == w.Selection.Value)).Sum(s => s.Question.Point) :
-                                 x.Where(w => w.Selection.HasValue && (w.Question.IsCorrect == w.Selection.Value)).Sum(s => s.SnapPoint.Value)
+                    TotalScore = isRealTime 
+                                 ? 
+                                 x.Where(w => w.Selection.HasValue).Select(w => {
+                                     if (w == null || w.Question == null)
+                                         return 0;
+                                     return w.Question.IsCorrect == w.Selection.Value ? w.Question.Point : w.Question.Point * w.Question.InCorrectScale;
+                                 }).Sum(s => s) 
+                                 :
+                                 x.Where(w => w.Selection.HasValue).Sum(s => s.SnapPoint.Value)
                 };
             });
 

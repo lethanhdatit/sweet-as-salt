@@ -20,20 +20,20 @@ namespace Sweet_as_Salt.Services
 
         public IEnumerable<QuestionnaireUsers> GetAll(string includeProperties = "")
         {
-            return _unitOfWork.QuestionnaireUserRepository.Find(includeProperties: includeProperties);
+            return _reponsitory.Find(includeProperties: includeProperties);
         }
 
         public async Task<QuestionnaireUsers> SubmitAsync(QuestionnaireUsers questionnaireUser)
         {
             //await CreateAsync(productDto);
-            _unitOfWork.QuestionnaireUserRepository.Add(questionnaireUser);
+            _reponsitory.Add(questionnaireUser);
             _unitOfWork.SaveChanges();
             return questionnaireUser;
         }
         public async Task<IEnumerable<QuestionnaireUsers>> SubmitRangeAsync(IEnumerable<QuestionnaireUsers> questionnaireUsers)
         {
             //await CreateAsync(productDto);
-            _unitOfWork.QuestionnaireUserRepository.AddRange(questionnaireUsers);
+            _reponsitory.AddRange(questionnaireUsers);
             _unitOfWork.SaveChanges();
             return questionnaireUsers;
         }
