@@ -138,7 +138,7 @@ export default class GameScreen extends Component {
 
     return (
       <div className="sas__game"
-        style={{height: window.innerWidth <= 767 ? `${window.innerHeight}px` : '100vh'}}
+        style={{height: window.innerWidth <= 767 ? `${window.innerHeight-56}px` : '100vh'}}
       >
         <div className="game__navbar">
           <Progress percent={currentPercent} />

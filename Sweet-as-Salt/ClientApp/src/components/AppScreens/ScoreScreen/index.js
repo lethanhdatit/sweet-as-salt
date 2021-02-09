@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import shopbtn from 'contents/images/buttons/shopbtn.png';
 import sharebtn from 'contents/images/buttons/sharebtn.png';
 import replaybtn from 'contents/images/buttons/replaybtn.png';
+import LoadingScreen from 'components/AppScreens/LoadingScreen';
 export default class ScoreScreen extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +51,7 @@ export default class ScoreScreen extends Component {
 
     return (
       (this.state.loading) ? (
-        <div>loading</div>
+        <LoadingScreen/>
       ) : (
           <div className="sas__blankpaper">
             <div className="sas__score">

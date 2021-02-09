@@ -10,6 +10,11 @@
        url('../../fonts/Trattatello.woff') format('woff'), /* Pretty Modern Browsers */
        url('../../fonts/Trattatello.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
+@font-face {
+  font-family: 'classique-saigon';
+  src: url('../../fonts/Classique-Saigon.woff') format('woff'),
+       url('../../fonts/Classique-Saigon.ttf') format('truetype');
+}
 * {
     margin: 0;
     padding: 0;
