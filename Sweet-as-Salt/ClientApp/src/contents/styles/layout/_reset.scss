@@ -65,3 +65,15 @@ html, body{
 ::-webkit-scrollbar-thumb:hover {
   background-color: #b7b0aa;
 }
+@media screen and (max-width: 767px) {
+  html { 
+    overflow: hidden; 
+    width: 100%; 
+  } 
+  body { 
+    height:100%; 
+    width: 105%; 
+    position:fixed; /* prevent overscroll bounce*/ 
+    overflow-y:scroll; 
+    -webkit-overflow-scrolling: touch; /* iOS velocity scrolling */ }
+}

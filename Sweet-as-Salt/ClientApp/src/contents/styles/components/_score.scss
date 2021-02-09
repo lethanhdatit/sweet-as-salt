@@ -11,4 +11,21 @@
       line-height: 0.5;
     }
   }
+  .score__actionbtngroup{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 40px;
+    width: 65%;
+    img{
+      width: 55px;
+    }
+    .actionbtngroup__item{
+      cursor: pointer;
+      text-align: center;
+      div{
+        margin-top: 2px;
+      }
+    }
+  }
 }

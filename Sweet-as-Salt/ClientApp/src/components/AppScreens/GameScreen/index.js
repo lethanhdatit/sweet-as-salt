@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import TinderCard from 'react-tinder-card';
 import LoadingScreen from 'components/AppScreens/LoadingScreen';
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
+import jokerimg from 'contents/images/game/joker.png';
+import jokerimgUp from 'contents/images/game/joker-up.png';
+import {Collapse} from 'react-collapse';
 export default class GameScreen extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +19,10 @@ export default class GameScreen extends Component {
       questionText: '',
       infoText: '',
       isFinish: false,
-      isLoading: true
+      isLoading: true,
+      isPaneOpen: false,
+      isPaneOpenBottom: false,
+      handleHeightChange: false
     }
   }
   async componentDidMount() {
@@ -32,6 +40,7 @@ export default class GameScreen extends Component {
         _infoText = nextQuestion.info;
       }
       console.log(data.characters);
+      //setTimeout(() => this.setState({isLoading: false}), 3000);
       this.setState({
         maxPoint: data.qMaxPoint,
         qLength: data.qLength,
@@ -43,7 +52,12 @@ export default class GameScreen extends Component {
         infoText: _infoText,
         isLoading: false
       });
+      
     }
+  }
+  onShowHelpText = () => {
+    this.setState({ isPaneOpenBottom: !this.state.isPaneOpenBottom, 
+    })
   }
   render() {
     const onSwipe = (direction, question, nextQuestion) => {
@@ -101,7 +115,8 @@ export default class GameScreen extends Component {
         dialogText: _dialogText,
         questionText: _questionText,
         infoText: _infoText,
-        isFinish: isFinish
+        isFinish: isFinish,
+        isPaneOpenBottom: false
       });
       console.log(this.state.answers);
       console.log(this.state.yourPoint);
@@ -115,29 +130,21 @@ export default class GameScreen extends Component {
         infoText: info
       });
     }
+
     return (
       <div className="sas__game">
+        <div>
+
+        </div>
         {
           this.state.isFinish != true
             ?
             <Fragment>
               {
                 this.state.isLoading == true ?
-                  // <div className="hint-gr">
-                  //   <h2>Loading .....</h2>
-                  // </div>
-                  <LoadingScreen/>
+                  <LoadingScreen />
                   :
                   <div className="sas__gamewrapper">
-
-                    {/* <div className="hint-gr">
-                      <h4>Dialog: {this.state.dialogText}</h4>
-                      <br />
-                      <h4>Question: {this.state.questionText}</h4>
-                      <br />
-                      <h4>Info: {this.state.infoText}</h4>
-                    </div> */}
-                    
                     {
                       this.state.gameSession != null ?
                         this.state.gameSession.map((item, index) => {
@@ -151,10 +158,23 @@ export default class GameScreen extends Component {
                             className="sas__gameitem"
                           >
                             <img src={_src} />
+                            
                             <div className="gameitem__dialog">
                               {this.state.dialogText}
                             </div>
-                            <div className="gameitem__help"></div>
+                            <div className="gameitem__charactername">
+                              {item.name}
+                            </div>
+                            <div className={`gameitem__help ${this.state.isPaneOpenBottom ? 'height-translate': ''}`}
+                            >
+                            <div onClick={() => this.onShowHelpText()} className="help__togglebtn">
+                                  <span>{this.state.questionText}</span>
+                                  <span className="help__joker">
+                                    {this.state.isPaneOpenBottom ? <img src={jokerimg}/> : <img src={jokerimgUp}/>}
+                                    </span>
+                                </div>
+                                <div>{this.state.infoText}</div>
+                            </div>
                           </TinderCard>
                         })
                         :
