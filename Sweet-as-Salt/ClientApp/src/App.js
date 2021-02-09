@@ -15,6 +15,7 @@ export default class App extends Component {
   }
   componentDidMount() { 
     setTimeout(() => this.setState({isFirstLoading: false}), 1000);
+    console.log(window.innerHeight)
   }
   
   componentWillUnmount() {
