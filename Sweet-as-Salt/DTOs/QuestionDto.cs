@@ -17,7 +17,7 @@ namespace Sweet_as_Salt
             ContentUrl = entity.ContentUrl;
             Point = entity.Point;
             IsCorrect = entity.IsCorrect;
-            InCorrectPoint = entity.InCorrectScale * entity.Point;
+            InCorrectPoint = Math.Round(entity.InCorrectScale * entity.Point, 0);
         }
 
         public long Id { get; set; }

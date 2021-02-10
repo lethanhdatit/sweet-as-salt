@@ -62,6 +62,7 @@ namespace Sweet_as_Salt.Controllers
         [HttpPost]
         public async Task<JsonResult> Submit(AnswersDto answers)
         {
+            //_logger.LogWarning("Submit 01");
             var response = new BaseResponse()
             {
                 IsSuccess = true,
@@ -107,10 +108,12 @@ namespace Sweet_as_Salt.Controllers
                             QuestionId = x.QuestionId,
                             UserId = user.Id,
                             Selection = x.Selection,
-                            SnapPoint = question.IsCorrect == x.Selection ? question.Point : question.Point * question.InCorrectScale
+                            SnapPoint = Math.Round(question.IsCorrect == x.Selection ? question.Point : question.Point * question.InCorrectScale, 0)
                         };
                     });
+                    //_logger.LogWarning("Submit 02");
                     await _questionnaireUserService.SubmitRangeAsync(QuestionnaireUsersDto);
+                    //_logger.LogWarning("Submit 03");
                 }
                 return JsonResponse(result: response);
             }

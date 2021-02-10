@@ -22,7 +22,8 @@ export default class GameScreen extends Component {
       isPaneOpen: false,
       isPaneOpenBottom: false,
       handleHeightChange: false,
-      userName: ''
+      userName: '',
+      submitting: false
     }
   }
   async componentDidMount() {
@@ -60,21 +61,24 @@ export default class GameScreen extends Component {
     })
   }
   handleGameSubmit = async () => {
-    this.setState({ isLoading: true });
-    var name = this.state.userName;
-    if (name != null && name != '') {
-      var data = {
-        userFullName: name,
-        answers: this.state.answers
-      };
-      await fetch('question/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+    if(this.state.submitting == false)
+    {
+      this.setState({ isLoading: true, submitting: true });
+      var name = this.state.userName;
+      if (name != null && name != '') {
+        var data = {
+          userFullName: name,
+          answers: this.state.answers
+        };
+        await fetch('question/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+      }
+      this.setState({ isLoading: false, submitting: false });
+      this.props.history.push("/score");
     }
-    this.setState({ isLoading: false });
-    this.props.history.push("/score");
   }
   render() {
     const onSwipe = (direction, question, nextQuestion) => {
@@ -129,7 +133,7 @@ export default class GameScreen extends Component {
       let isFinish = _answers.length == this.state.qLength;
       this.setState({
         answers: _answers,
-        yourPoint: Number(myPoint.toFixed(1)),
+        yourPoint: Number(myPoint.toFixed(0)),
         dialogText: _dialogText,
         questionText: _questionText,
         infoText: _infoText,
@@ -215,7 +219,7 @@ export default class GameScreen extends Component {
                 <div className="gameform__info">Your're a good and gracious king.</div>
                 <div className="gameform__score">Your score: {Math.floor(this.state.yourPoint)}</div>
                 <input type="email" id="gameformEmail" onChange={(evt) => this.setState({ userName: evt.target.value })} placeholder="Name" />
-                <div className="gameform__submitbtn" onClick={() => this.handleGameSubmit()} onTouchStart={() => this.handleGameSubmit()}>submit</div>
+                { this.state.submitting == false ? <div className="gameform__submitbtn" onClick={() => this.handleGameSubmit()} onTouchStart={() => this.handleGameSubmit()}>submit</div> : <div></div> }
               </div>
             </div>
         }

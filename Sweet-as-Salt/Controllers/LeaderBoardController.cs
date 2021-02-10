@@ -45,7 +45,7 @@ namespace Sweet_as_Salt.Controllers
                     ID = x.Key.Id,
                     Name = x.Key.FullName,
                     CreatedTS = DateTime.UtcNow,
-                    TotalScore = isRealTime 
+                    TotalScore = Math.Round(isRealTime 
                                  ? 
                                  x.Where(w => w.Selection.HasValue).Select(w => {
                                      if (w == null || w.Question == null)
@@ -53,7 +53,7 @@ namespace Sweet_as_Salt.Controllers
                                      return w.Question.IsCorrect == w.Selection.Value ? w.Question.Point : w.Question.Point * w.Question.InCorrectScale;
                                  }).Sum(s => s) 
                                  :
-                                 x.Where(w => w.Selection.HasValue).Sum(s => s.SnapPoint.Value)
+                                 x.Where(w => w.Selection.HasValue).Sum(s => s.SnapPoint.Value), 0)
                 };
             });
 
