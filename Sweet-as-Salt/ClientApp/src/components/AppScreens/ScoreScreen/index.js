@@ -29,7 +29,7 @@ export default class ScoreScreen extends Component {
             <tr key={item.id}>
               <td>{item.rank}</td>
               <td>{item.name}</td>
-              <td>{item.totalScore}</td>
+              <td>{Number(item.totalScore.toFixed(1))}</td>
               {/* <td>{item.createdTS}</td> */}
             </tr>
           )}

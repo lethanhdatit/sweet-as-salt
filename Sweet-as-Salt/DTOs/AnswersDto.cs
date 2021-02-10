@@ -8,7 +8,7 @@ namespace Sweet_as_Salt
     public class AnswerDto
     {
         public long QuestionId { get; set; }
-        public string Selection { get; set; }
+        public bool Selection { get; set; }
     }
     public class AnswersDto
     {

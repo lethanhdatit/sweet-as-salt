@@ -21,7 +21,8 @@ export default class GameScreen extends Component {
       isLoading: true,
       isPaneOpen: false,
       isPaneOpenBottom: false,
-      handleHeightChange: false
+      handleHeightChange: false,
+      userName: ''
     }
   }
   async componentDidMount() {
@@ -38,7 +39,7 @@ export default class GameScreen extends Component {
         _questionText = nextQuestion.content;
         _infoText = nextQuestion.info;
       }
-      console.log(data);
+      //console.log(data);
       this.setState({
         maxPoint: data.qMaxPoint,
         qLength: data.qLength,
@@ -50,20 +51,34 @@ export default class GameScreen extends Component {
         infoText: _infoText,
         isLoading: false
       });
-      
+
     }
   }
   onShowHelpText = () => {
-    this.setState({ isPaneOpenBottom: !this.state.isPaneOpenBottom, 
+    this.setState({
+      isPaneOpenBottom: !this.state.isPaneOpenBottom,
     })
   }
-  handleGameSubmit = () => {
-    // sử lý cập nhật bảng xếp hạng
+  handleGameSubmit = async () => {
+    this.setState({ isLoading: true });
+    var name = this.state.userName;
+    if (name != null && name != '') {
+      var data = {
+        userFullName: name,
+        answers: this.state.answers
+      };
+      await fetch('question/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
+    this.setState({ isLoading: false });
     this.props.history.push("/score");
   }
   render() {
     const onSwipe = (direction, question, nextQuestion) => {
-      console.log('You swiped: ' + direction);
+      //console.log('You swiped: ' + direction);
       switch (direction) {
         case 'right': {
           //yes
@@ -95,7 +110,7 @@ export default class GameScreen extends Component {
       }
       var myPoint = 0;
       var questions = this.state.gameSession;
-      console.log("questions", questions)
+      //console.log("questions", questions)
       _answers.map((answer, index) => {
         var index = questions.findIndex(f => f.question.id === answer.questionId);
         if (index >= 0) {
@@ -121,16 +136,16 @@ export default class GameScreen extends Component {
         isFinish: isFinish,
         isPaneOpenBottom: false
       });
-      console.log(this.state.answers);
-      console.log('yourPoint',this.state.yourPoint);
+      //console.log(this.state.answers);
+      //console.log('yourPoint', this.state.yourPoint);
     }
     var currentPercent = (this.state.yourPoint * 100) / this.state.maxPoint;
-    console.log(currentPercent) 
+    //console.log(currentPercent)
     const onShowExtendInfo = (info) => {
       //todo show extend info
 
       //
-      console.log(info);
+      //console.log(info);
       this.setState({
         infoText: info
       });
@@ -138,11 +153,11 @@ export default class GameScreen extends Component {
 
     return (
       <div className="sas__game"
-        //style={{height: window.innerWidth <= 767 ? `${window.innerHeight-56}px` : '100vh'}}
+      //style={{height: window.innerWidth <= 767 ? `${window.innerHeight-56}px` : '100vh'}}
       >
         <div className="game__navbar">
           <Progress percent={currentPercent} />
-      </div>
+        </div>
         {
           this.state.isFinish != true
             ?
@@ -163,27 +178,27 @@ export default class GameScreen extends Component {
                             onSwipe={(direction) => onSwipe(direction, item.question, nextQuestion)}
                             preventSwipe={['up', 'down']}
                             className="sas__gameitem"
-                            //style={{height: window.innerWidth <= 767 ? `${window.innerHeight}px` : '100vh'}}
+                          //style={{height: window.innerWidth <= 767 ? `${window.innerHeight}px` : '100vh'}}
                           >
                             <img src={_src} />
-                            
+
                             <div className="gameitem__dialog">
                               {this.state.dialogText}
                             </div>
                             <div className="gameitem__charactername">
                               {item.name}
                             </div>
-                            <div className={`gameitem__help ${this.state.isPaneOpenBottom ? 'height-translate': ''}`}
+                            <div className={`gameitem__help ${this.state.isPaneOpenBottom ? 'height-translate' : ''}`}
                             >
-                            <div onClick={() => this.onShowHelpText()} 
-                              onTouchStart={this.onShowHelpText}
-                            className="help__togglebtn">
-                                  <span>{this.state.questionText}</span>
-                                  <span className="help__joker">
-                                    {this.state.isPaneOpenBottom ? <img src={jokerimg}/> : <img src={jokerimgUp}/>}
-                                    </span>
-                                </div>
-                                <div>{this.state.infoText}</div>
+                              <div onClick={() => this.onShowHelpText()}
+                                onTouchStart={this.onShowHelpText}
+                                className="help__togglebtn">
+                                <span>{this.state.questionText}</span>
+                                <span className="help__joker">
+                                  {this.state.isPaneOpenBottom ? <img src={jokerimg} /> : <img src={jokerimgUp} />}
+                                </span>
+                              </div>
+                              <div>{this.state.infoText}</div>
                             </div>
                           </TinderCard>
                         })
@@ -199,7 +214,7 @@ export default class GameScreen extends Component {
                 <div className="gameform__header">Congratulations!</div>
                 <div className="gameform__info">Your're a good and gracious king.</div>
                 <div className="gameform__score">Your score: {Math.floor(this.state.yourPoint)}</div>
-                <input type="email" id="gameformEmail" placeholder="Name"/>
+                <input type="email" id="gameformEmail" onChange={(evt) => this.setState({ userName: evt.target.value })} placeholder="Name" />
                 <div className="gameform__submitbtn" onClick={() => this.handleGameSubmit()} onTouchStart={() => this.handleGameSubmit()}>submit</div>
               </div>
             </div>
