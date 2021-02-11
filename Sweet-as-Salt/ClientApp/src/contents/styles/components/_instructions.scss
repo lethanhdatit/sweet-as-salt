@@ -43,3 +43,8 @@
   background: #ffeed7;
   opacity: 1!important;
 }
+@media screen and (max-width: 767px){
+  .instructions{
+    padding-top: 4.4em;
+  }
+}

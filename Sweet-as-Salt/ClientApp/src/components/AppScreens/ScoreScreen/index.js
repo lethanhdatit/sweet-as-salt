@@ -16,21 +16,12 @@ export default class ScoreScreen extends Component {
   static fetchData(data) {
     return (
       <table className='table table-responsive' aria-labelledby="tabelLabel">
-        {/* <thead>
-                      <tr>
-                          <th>Hạng</th>
-                          <th>Tổng Điểm</th>
-                          <th>Tên</th>
-                          <th>Ngày Chơi</th>
-                      </tr>
-                  </thead> */}
         <tbody>
           {data.map(item =>
             <tr key={item.id}>
               <td>{item.rank}</td>
               <td>{item.name}</td>
               <td>{Number(item.totalScore.toFixed(1))}</td>
-              {/* <td>{item.createdTS}</td> */}
             </tr>
           )}
         </tbody>
@@ -88,7 +79,7 @@ export default class ScoreScreen extends Component {
     try {
       const response = await fetch('leaderBoard'); // gọi api lên controller để lấy data
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       this.setState({ items: data, loading: false });
     }
     catch (e) {

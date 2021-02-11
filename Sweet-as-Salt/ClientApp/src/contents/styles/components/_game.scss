@@ -66,10 +66,10 @@
       overflow: hidden;
       .gameitem__dialog{
         background-image: url('../../images/game/dialog-box.png');
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
-        width: 90%;
-        height: 150px;
+        width: 92%;
+        height: 155px;
         top: 60px;
         position: absolute;
         right: 0;

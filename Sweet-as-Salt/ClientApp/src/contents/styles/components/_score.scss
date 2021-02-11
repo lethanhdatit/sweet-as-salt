@@ -11,6 +11,9 @@
       line-height: 0.5;
     }
   }
+  .table{
+    height: calc(100vh/2);
+  }
   .score__actionbtngroup{
     display: flex;
     justify-content: space-between;
@@ -27,5 +30,12 @@
         margin-top: 2px;
       }
     }
+  }
+}
+@media screen and (max-width: 767px){
+  .score__actionbtngroup{
+    position: initial!important;
+    width: auto!important;
+    padding-right: 1em;
   }
 }
