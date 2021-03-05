@@ -158,6 +158,7 @@ export default class GameScreen extends Component {
     return (
       <div className="sas__game"
       //style={{height: window.innerWidth <= 767 ? `${window.innerHeight-56}px` : '100vh'}}
+      style={{height: window.innerHeight}}
       >
         <div className="game__navbar">
           <Progress percent={currentPercent} />
@@ -213,7 +214,7 @@ export default class GameScreen extends Component {
               }
             </Fragment>
             :
-            <div className="sas__gamesubmit">
+            <div className="sas__gamesubmit" style={{height: window.innerHeight}}>
               <div className="gamesubmit__gameform">
                 <div className="gameform__header">Congratulations!</div>
                 <div className="gameform__info">Your're a good and gracious king.</div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class AboutScreen extends Component {
   render() {
     return (
-      <div className="sas__blankpaper">
+      <div className="sas__blankpaper" style={{height: window.innerHeight}}>
         <div className="blankpaper__content">
           <div className="sas__about">
             <div>

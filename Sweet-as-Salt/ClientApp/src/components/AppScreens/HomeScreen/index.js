@@ -18,7 +18,7 @@ export default class HomeScreen extends Component {
         onSwipe={this.onSwipe}
         
       >
-        <div className="sas__home"></div>
+        <div className="sas__home" style={{height: window.innerHeight}}></div>
       </TinderCard>
 
     );
