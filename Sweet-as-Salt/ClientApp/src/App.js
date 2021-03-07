@@ -30,7 +30,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div className="sas">
+      <div className="sas" style={{height: window.innerHeight}}>
         <div className="sas__background">
           {this.state.isFirstLoading ? (
             <LoadingScreen />

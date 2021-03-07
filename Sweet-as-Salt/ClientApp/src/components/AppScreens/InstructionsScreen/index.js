@@ -18,7 +18,7 @@ export default class InstructionsScreen extends Component {
       initialSlide: 0,
     };
     return (
-      <div className="sas__blankpaper instructions">
+      <div className="sas__blankpaper instructions" style={{height: window.innerHeight}}>
         <div className="sas__instructions">
           <Slider 
           {...settings}

@@ -6,7 +6,7 @@ import { Container } from 'reactstrap';
 function AppLayout(props) {
   return (
     <div>
-      <div className="sas__container">
+      <div className="sas__container" style={{height: window.innerHeight}}>
         <NavBar />
         {props.children}
       </div>

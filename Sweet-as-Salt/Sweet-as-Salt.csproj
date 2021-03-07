@@ -8,6 +8,7 @@
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <RootNamespace>Sweet_as_Salt</RootNamespace>
+    <UserSecretsId>abc189e5-2560-4bea-9629-c8e044ea3224</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

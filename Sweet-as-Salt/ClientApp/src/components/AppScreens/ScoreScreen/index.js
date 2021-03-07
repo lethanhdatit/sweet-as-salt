@@ -44,7 +44,7 @@ export default class ScoreScreen extends Component {
       (this.state.loading) ? (
         <LoadingScreen/>
       ) : (
-          <div className="sas__blankpaper">
+          <div className="sas__blankpaper" style={{height: window.innerHeight}}>
             <div className="sas__score">
               <div className="score__header">
                 <div className="score__headermain">top best kings</div>
