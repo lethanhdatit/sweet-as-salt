@@ -4,26 +4,12 @@ import '../contents/styles/porfolio/styles.scss';
 import oiilogo from '../contents/images/porfolio/oii-logo.png';
 import oiisocial from '../contents/images/porfolio/social.png';
 import oiiprofile from '../contents/images/porfolio/sas-profile.png';
+import PortfolioNavbar from './PortfolioNavbar';
 export default class Porfolio extends Component {
   render() {
     return (
       <div className="porfolio">
-        <div className="porfolio__nav">
-          <img src={oiilogo} />
-          <div className="nav__right">
-            <div className="right__links">
-            <NavLink activeClassName="active" className="nav-link" to="/">Projects</NavLink>
-            <NavLink activeClassName="active" className="nav-link" 
-            //to="/aboutoii"
-            to="/home"
-            >About</NavLink>
-            </div>
-            <div className="right__contact">
-              <a href="mailto:nguyendangtrung09@gmail.com" >dangtrung@oiistudio.com</a>
-              <a href="tel:393516304306">+39 3516 304 306</a>
-            </div>
-          </div>
-        </div>
+        <PortfolioNavbar/>
         <div className="porfolio__content">
           <div className="content__paging">
             project 1/9

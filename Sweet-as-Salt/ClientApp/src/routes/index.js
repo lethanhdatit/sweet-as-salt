@@ -13,7 +13,7 @@ const appRoutes = [
   },
   {
     exact: false,
-    path: '/aboutoii',
+    path: '/oii-studio/about',
     component: AboutPorfolio
   },
   // {
@@ -23,27 +23,27 @@ const appRoutes = [
   // }, 
   {
     exact: true,
-    path: '/home',
+    path: '/sweet-as-salt/home',
     component: HomeScreen
   },
   {
     exact: false,
-    path: '/instructions',
+    path: '/sweet-as-salt/instructions',
     component: InstructionsScreen
   },
   {
     exact: false,
-    path: '/about',
+    path: '/sweet-as-salt/about',
     component: AboutScreen
   },
   {
     exact: false,
-    path: '/score',
+    path: '/sweet-as-salt/score',
     component: ScoreScreen
   },
   {
     exact: false,
-    path: '/game',
+    path: '/sweet-as-salt/game',
     component: GameScreen
   }
 ]
