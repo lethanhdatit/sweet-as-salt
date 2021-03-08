@@ -20,7 +20,7 @@ export default class Porfolio extends Component {
               <img src={oiiprofile} />
             </div>
             <div className="item__names">
-              <div className="name__style name__active" onClick={() => this.props.history.push("/home")}>Dear as salt</div>
+                        <div className="name__style name__active" onClick={() => this.props.history.push("/sweet-as-salt/home")}>Dear as salt</div>
               <div className="name__style" onClick={()=> window.open('https://ndrcldrll.github.io/kelby/about/')}>the town of kelby</div>
               <div className="name__style">sugar and salt</div>
               <div className="name__style">MODA</div>
