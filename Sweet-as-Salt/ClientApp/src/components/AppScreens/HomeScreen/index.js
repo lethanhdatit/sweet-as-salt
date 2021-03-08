@@ -10,7 +10,7 @@ export default class HomeScreen extends Component {
   }
   onSwipe = (direction) => {
     console.log('You swiped: ' + direction);
-    this.props.history.push("/game");
+      this.props.history.push("/sweet-as-salt/game");
   }
   render() {
     return (

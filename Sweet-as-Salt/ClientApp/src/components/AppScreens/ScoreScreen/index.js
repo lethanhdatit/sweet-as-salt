@@ -29,10 +29,10 @@ export default class ScoreScreen extends Component {
     );
   }
   onClickShareBtn = () => {
-    this.props.history.push("/game");
+      this.props.history.push("/sweet-as-salt/game");
   }
   onClickreplayBtn = () => {
-    this.props.history.push("/game");
+      this.props.history.push("/sweet-as-salt/game");
   }
 
   render() {
