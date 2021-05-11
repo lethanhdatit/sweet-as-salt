@@ -29,10 +29,10 @@ export default class ScoreScreen extends Component {
     );
   }
   onClickShareBtn = () => {
-      this.props.history.push("/sweet-as-salt/game");
+      this.props.history.push("/game");
   }
   onClickreplayBtn = () => {
-      this.props.history.push("/sweet-as-salt/game");
+      this.props.history.push("/game");
   }
 
   render() {
@@ -79,7 +79,7 @@ export default class ScoreScreen extends Component {
     try {
       const response = await fetch('leaderBoard'); // gọi api lên controller để lấy data
       const data = await response.json();
-      //console.log(data);
+      console.log(data);
       this.setState({ items: data, loading: false });
     }
     catch (e) {

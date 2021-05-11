@@ -6,44 +6,44 @@ import ScoreScreen from 'components/AppScreens/ScoreScreen';
 import Porfolio from 'porfolio/index.js';
 import AboutPorfolio from 'porfolio/About';
 const appRoutes = [
-  {
-    exact: true,
-    path: '/',
-    component: Porfolio
-  },
+  //{
+  //  exact: true,
+  //  path: '/',
+  //  component: Porfolio
+  //},
+  //{
+  //  exact: false,
+  //  path: '/oii-studio/about',
+  //  component: AboutPorfolio
+  //},
+   {
+     exact: true,
+     path: '/',
+     component: HomeScreen
+   }, 
+  //{
+  //  exact: true,
+  //  path: '/sweet-as-salt/home',
+  //  component: HomeScreen
+  //},
   {
     exact: false,
-    path: '/oii-studio/about',
-    component: AboutPorfolio
-  },
-  // {
-  //   exact: true,
-  //   path: '/',
-  //   component: HomeScreen
-  // }, 
-  {
-    exact: true,
-    path: '/sweet-as-salt/home',
-    component: HomeScreen
-  },
-  {
-    exact: false,
-    path: '/sweet-as-salt/instructions',
+    path: '/instructions',
     component: InstructionsScreen
   },
   {
     exact: false,
-    path: '/sweet-as-salt/about',
+    path: '/about',
     component: AboutScreen
   },
   {
     exact: false,
-    path: '/sweet-as-salt/score',
+    path: '/score',
     component: ScoreScreen
   },
   {
     exact: false,
-    path: '/sweet-as-salt/game',
+    path: '/game',
     component: GameScreen
   }
 ]
